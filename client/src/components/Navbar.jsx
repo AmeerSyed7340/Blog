@@ -5,9 +5,11 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import LoginDialog from './LoginDialog';
 import { useState } from 'react';
+import CreateDialog from './CreateDialog';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const [signupOpen, setsetupOpen] = useState(false);
 
   function handleLogin(){
     setOpen(true);
@@ -15,10 +17,11 @@ export default function NavBar() {
 
   function handleClose(){
     setOpen(false);
+    setsetupOpen(false);
   }
 
   function handleSignup(){
-    console.log("pressed signup");
+    setsetupOpen(true);
   }
 
   function handleFormSubmit(){
@@ -38,7 +41,7 @@ export default function NavBar() {
             <Button color="inherit" onClick={handleSignup}>Sign Up</Button>
           </Toolbar>
         </AppBar>
-
+        <CreateDialog open={signupOpen} onClose={handleClose} onFormSubmit={handleSignup}></CreateDialog>
         <LoginDialog open={open} onClose={handleClose} onFormSubmit={handleFormSubmit}/>
       </Box>
     );
