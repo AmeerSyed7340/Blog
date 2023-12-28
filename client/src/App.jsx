@@ -8,10 +8,20 @@ import NavBar from './components/Navbar';
 
 function App() {
   const [authorize_flag, setAuthorize_flag] = useState(false); 
+  const [displayName, setDisplayName] = useState("");
+
+  function displayHandler(value){
+    setDisplayName(value);
+  }
 
   return (
     <>
-    <NavBar />
+    <NavBar
+      displayName = {displayName}
+      setDisplayName = {displayHandler}
+      authorize_flag = {authorize_flag}
+      setAuthorize_flag = {setAuthorize_flag}
+    />
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />

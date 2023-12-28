@@ -7,7 +7,7 @@ import LoginDialog from './LoginDialog';
 import { useState } from 'react';
 import CreateDialog from './CreateDialog';
 
-export default function NavBar() {
+export default function NavBar({authorize_flag, setAuthorize_flag}) {
   const [open, setOpen] = useState(false);
   const [signupOpen, setsetupOpen] = useState(false);
 

@@ -2,6 +2,7 @@
 
 const User = require('../models/User');
 
+
 exports.createUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -16,10 +17,20 @@ exports.createUser = async (req, res) => {
     res.status(201).json({ message: 'User created successfully', user });
   } catch (err) {
     console.error(err.message);
-<<<<<<< HEAD
     res.status(500).json({ MESSAGE: err.message});
-=======
-    res.status(500).json({MESSAAGE: err.message});
->>>>>>> 2f54f6aca1b57becdcce5316d0d5ed3e66603f89
   }
 };
+
+exports.loginUser = async (req, res) => {
+  const { username, password } = req.body;
+  try{
+    const user = await User.findOne({username, password});
+    if(user == null){
+      res.json({username: user, authenticated: "false"})
+    }else{
+      res.json({username: user.username, authenticated: "true"})
+    }
+  }catch(err){
+    res.status(500).json({ MESSAGE: err.message});
+  }
+}
