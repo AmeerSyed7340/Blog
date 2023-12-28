@@ -24,12 +24,6 @@ export default function NavBar() {
     setsetupOpen(true);
   }
 
-  function handleFormSubmit(){
-    console.log("Form Submitted");
-    // Add logic to handle form submission
-    
-    handleClose();
-  }
     return (
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
@@ -41,8 +35,8 @@ export default function NavBar() {
             <Button color="inherit" onClick={handleSignup}>Sign Up</Button>
           </Toolbar>
         </AppBar>
-        <CreateDialog open={signupOpen} onClose={handleClose} onFormSubmit={handleSignup}></CreateDialog>
-        <LoginDialog open={open} onClose={handleClose} onFormSubmit={handleFormSubmit}/>
+        <CreateDialog open={signupOpen} onClose={handleClose}/>
+        <LoginDialog open={open} onClose={handleClose}/>
       </Box>
     );
   }
