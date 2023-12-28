@@ -24,6 +24,7 @@ export default function NavBar() {
   function handleFormSubmit(){
     console.log("Form Submitted");
     // Add logic to handle form submission
+    
     handleClose();
   }
     return (
