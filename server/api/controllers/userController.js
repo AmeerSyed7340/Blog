@@ -26,7 +26,7 @@ exports.loginUser = async (req, res) => {
   try{
     const user = await User.findOne({username, password});
     if(user == null){
-      res.json({username: user, authenticated: "false"})
+      res.status(401).json({username: user, authenticated: "false"})
     }else{
       res.json({username: user.username, authenticated: "true"})
     }
