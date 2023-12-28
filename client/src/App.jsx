@@ -8,18 +8,19 @@ import NavBar from './components/Navbar';
 
 function App() {
   const [authorize_flag, setAuthorize_flag] = useState(false); 
+
   return (
     <>
     <NavBar />
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/blog/:id" element={<ReadPage />} />
-          <Route path="/write" element={
-              authorize_flag ? <WritePage /> : <Navigate to="/" />
-            } />
-        </Routes>
-      </Router>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/blog/:id" element={<ReadPage />} />
+        <Route path="/write" element={
+            authorize_flag ? <WritePage /> : <Navigate to="/" />
+          } />
+      </Routes>
+    </Router>
     </>
   );
 }

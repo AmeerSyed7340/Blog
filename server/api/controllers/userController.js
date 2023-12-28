@@ -16,6 +16,10 @@ exports.createUser = async (req, res) => {
     res.status(201).json({ message: 'User created successfully', user });
   } catch (err) {
     console.error(err.message);
+<<<<<<< HEAD
     res.status(500).json({ MESSAGE: err.message});
+=======
+    res.status(500).json({MESSAAGE: err.message});
+>>>>>>> 2f54f6aca1b57becdcce5316d0d5ed3e66603f89
   }
 };
