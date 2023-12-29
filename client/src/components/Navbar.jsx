@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import LoginDialog from './LoginDialog';
 import { useState } from 'react';
 import CreateDialog from './CreateDialog';
+import CreateBlog from './CreateBlog';
 
 export default function NavBar({authorize_flag, setAuthorize_flag}) {
   const [open, setOpen] = useState(false);
