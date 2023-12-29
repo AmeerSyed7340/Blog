@@ -14,10 +14,9 @@ exports.createUser = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully', user });
+    res.status(201).json({ authenticated: "true", user });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ MESSAGE: err.message});
+    res.status(500).json({ authenticated: "false", message: err.message});
   }
 };
 
