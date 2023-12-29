@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const LoginDialog = ({ open, onClose, onFormSubmit }) => {
+const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
@@ -30,8 +30,10 @@ const LoginDialog = ({ open, onClose, onFormSubmit }) => {
         console.log(response, data);
         setLogin(false);
         onClose();
+        setAuthorize_flag(true);
       }else{
         setLogin(true);
+        setAuthorize_flag(false);
       }
 
     } catch (e) {

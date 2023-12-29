@@ -34,10 +34,11 @@ export default function NavBar({authorize_flag, setAuthorize_flag}) {
             </Typography>
             <Button color="inherit" onClick={handleLogin}>Login</Button>
             <Button color="inherit" onClick={handleSignup}>Sign Up</Button>
+            {authorize_flag && <CreateBlog/>}
           </Toolbar>
         </AppBar>
         <CreateDialog open={signupOpen} onClose={handleClose}/>
-        <LoginDialog open={open} onClose={handleClose}/>
+        <LoginDialog open={open} onClose={handleClose} setAuthorize_flag={setAuthorize_flag}/>
       </Box>
     );
   }
