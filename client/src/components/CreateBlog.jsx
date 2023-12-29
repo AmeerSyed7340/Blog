@@ -1,10 +1,21 @@
 import Button from '@mui/material/Button';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
+import CreateBlogDialog from './CreateBlogDialog';
 
 export default function CreateBlog() {
     const { username } = useAuth();
-    
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
+    const handleClickOpen = () => {
+        setDialogOpen(true);
+    };
+
+    const handleClose = () => {
+        setDialogOpen(false);
+    };
 
     async function endpoint_call() {
         //console.log(Username, Password)
@@ -16,16 +27,16 @@ export default function CreateBlog() {
                 },
                 body: JSON.stringify({
                     username: username,
-                    title: "I like big",
-                    content: "butts and i cannot lie"
+                    title: title,
+                    content: content
                 })
             });
             const data = await response.json();
-            if (response.status == 200) {
-                console.log(response, data);     
-                  
+            if (response.status == 200 || response.status == 201) {
+                console.log(response, data);
+                handleClose();
             } else {
-                console.log('Server responded with status:', response.status);
+                console.log('Server responded with status:', response.status);                
             }
 
         } catch (e) {
@@ -34,10 +45,21 @@ export default function CreateBlog() {
         }
     }
 
-    function handleSubmit(){
+    function handleSubmit() {
         console.log(username);
     }
     return (
-        <Button color='inherit' onClick={endpoint_call}>Create Blog</Button>
+        <>
+            <Button color='inherit' onClick={handleClickOpen}>Create Blog</Button>
+            <CreateBlogDialog
+                open={dialogOpen}
+                handleClose={handleClose}
+                setContent={setContent}
+                setTitle={setTitle}
+                title={title}
+                content={content}
+                endpoint_call={endpoint_call}
+            />
+        </>
     );
 }
