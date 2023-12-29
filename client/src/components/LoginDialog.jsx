@@ -35,6 +35,8 @@ const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
         setLogin(false);
         onClose();
         setAuthorize_flag(true);
+        
+        //Pass on the username to make it globally accessible
         setUser(Username);
       }else{
         setLogin(true);
