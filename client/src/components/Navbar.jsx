@@ -9,38 +9,38 @@ import CreateDialog from './CreateDialog';
 import CreateBlog from './CreateBlog';
 import RetrieveUserBlog from './RetrieveUserBlogs';
 
-export default function NavBar({authorize_flag, setAuthorize_flag}) {
+export default function NavBar({ authorize_flag, setAuthorize_flag }) {
   const [open, setOpen] = useState(false);
   const [signupOpen, setsetupOpen] = useState(false);
 
-  function handleLogin(){
+  function handleLogin() {
     setOpen(true);
   }
 
-  function handleClose(){
+  function handleClose() {
     setOpen(false);
     setsetupOpen(false);
   }
 
-  function handleSignup(){
+  function handleSignup() {
     setsetupOpen(true);
   }
 
-    return (
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Title
-            </Typography>
-            {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Login</Button>}
-            {!authorize_flag && <Button color="inherit" onClick={handleSignup}>Sign Up</Button>}
-            {authorize_flag && <CreateBlog/>}
-            {authorize_flag && <RetrieveUserBlog/>}
-          </Toolbar>
-        </AppBar>
-        <CreateDialog open={signupOpen} onClose={handleClose}/>
-        <LoginDialog open={open} onClose={handleClose} setAuthorize_flag={setAuthorize_flag}/>
-      </Box>
-    );
-  }
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Title
+          </Typography>
+          {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Login</Button>}
+          {!authorize_flag && <Button color="inherit" onClick={handleSignup}>Sign Up</Button>}
+          {authorize_flag && <CreateBlog />}
+          {authorize_flag && <RetrieveUserBlog />}
+        </Toolbar>
+      </AppBar>
+      <CreateDialog open={signupOpen} onClose={handleClose} />
+      <LoginDialog open={open} onClose={handleClose} setAuthorize_flag={setAuthorize_flag} />
+    </Box>
+  );
+}
