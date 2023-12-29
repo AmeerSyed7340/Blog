@@ -7,6 +7,7 @@ import LoginDialog from './LoginDialog';
 import { useState } from 'react';
 import CreateDialog from './CreateDialog';
 import CreateBlog from './CreateBlog';
+import RetrieveUserBlog from './RetrieveUserBlogs';
 
 export default function NavBar({authorize_flag, setAuthorize_flag}) {
   const [open, setOpen] = useState(false);
@@ -32,9 +33,10 @@ export default function NavBar({authorize_flag, setAuthorize_flag}) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Title
             </Typography>
-            <Button color="inherit" onClick={handleLogin}>Login</Button>
-            <Button color="inherit" onClick={handleSignup}>Sign Up</Button>
+            {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Login</Button>}
+            {!authorize_flag && <Button color="inherit" onClick={handleSignup}>Sign Up</Button>}
             {authorize_flag && <CreateBlog/>}
+            {authorize_flag && <RetrieveUserBlog/>}
           </Toolbar>
         </AppBar>
         <CreateDialog open={signupOpen} onClose={handleClose}/>
