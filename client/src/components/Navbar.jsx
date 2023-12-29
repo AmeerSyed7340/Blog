@@ -11,7 +11,7 @@ import RetrieveUserBlog from './RetrieveUserBlogs';
 
 export default function NavBar({ authorize_flag, setAuthorize_flag }) {
   const [open, setOpen] = useState(false);
-  const [signupOpen, setsetupOpen] = useState(false);
+  const [signupOpen, setsignupOpen] = useState(false);
 
   function handleLogin() {
     setOpen(true);
@@ -19,11 +19,11 @@ export default function NavBar({ authorize_flag, setAuthorize_flag }) {
 
   function handleClose() {
     setOpen(false);
-    setsetupOpen(false);
+    setsignupOpen(false);
   }
 
   function handleSignup() {
-    setsetupOpen(true);
+    setsignupOpen(true);
   }
 
   return (
