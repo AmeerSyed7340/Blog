@@ -14,10 +14,9 @@ exports.createUser = async (req, res) => {
 
     await user.save();
 
-    res.status(201).json({ message: 'User created successfully', user });
+    res.status(201).json({ authenticated: true, user });
   } catch (err) {
-    console.error(err.message);
-    res.status(500).json({ MESSAGE: err.message});
+    res.status(500).json({ authenticated: false, message: err.message});
   }
 };
 
@@ -26,9 +25,9 @@ exports.loginUser = async (req, res) => {
   try{
     const user = await User.findOne({username, password});
     if(user == null){
-      res.status(401).json({username: user, authenticated: "false"})
+      res.status(401).json({username: user, authenticated: false})
     }else{
-      res.json({username: user.username, authenticated: "true"})
+      res.json({username: user.username, authenticated: true})
     }
   }catch(err){
     res.status(500).json({ MESSAGE: err.message});
