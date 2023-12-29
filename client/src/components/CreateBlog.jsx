@@ -9,7 +9,7 @@ export default function CreateBlog() {
     async function endpoint_call() {
         //console.log(Username, Password)
         try {
-            const response = await fetch("http://127.0.0.1:3000/api/blogs", {
+            const response = await fetch("http://127.0.0.1:3000/api/blogs/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
