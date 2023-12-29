@@ -6,11 +6,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+
+  //create setUser using context to pass to createBlog
+  const {setUser} = useAuth();
 
   async function endpoint_call() {
     //console.log(Username, Password)
@@ -31,6 +35,7 @@ const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
         setLogin(false);
         onClose();
         setAuthorize_flag(true);
+        setUser(Username);
       }else{
         setLogin(true);
         setAuthorize_flag(false);

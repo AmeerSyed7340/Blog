@@ -1,26 +1,20 @@
 // AuthContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState("");
 
-  const login = (user) => {
-    setIsAuthenticated(true);
-    setUsername(user);
-  };
-
-  const logout = () => {
-    setIsAuthenticated(false);
-    setUsername('');
+  // Function to update the username after login
+  const setUser = (newUsername) => {
+    setUsername(newUsername);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, username, login, logout }}>
+    <AuthContext.Provider value={{ username, setUser }}>
       {children}
     </AuthContext.Provider>
   );
