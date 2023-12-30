@@ -12,10 +12,6 @@ export default function CreateBlogDialog({ open, handleClose, endpoint_call, set
     setContent(event.target.value);
   };
 
-  const saveAndClose = () => {
-    handleSave(title, content);
-    handleClose();
-  };
 
   return (
     <Dialog open={open} onClose={handleClose}>
