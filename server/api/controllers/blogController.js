@@ -6,8 +6,7 @@ exports.createBlog = async (req, res) => {
         let blog = new Blog({
           username,
           title,
-          content,
-
+          content
         });
         await blog.save();
         res.status(201).json({ authenticated: true, message: "created blog"});
@@ -17,27 +16,39 @@ exports.createBlog = async (req, res) => {
 }
 
 exports.updateBlog = async (req, res) => {
-
-
-}
-
-exports.readBlog = async (req,res) => {
-  //const { postID, username, title, content, createdAt } = req.body;
+  const { username, title, newTitle, newContent } = req.body;
   try{
-    const blog = await Blog.find();
-    res.status(200).json({blog, authenticated: true});
+    const blog = await Blog.findOneAndUpdate({username, title}, {"content": newContent, "title": newTitle});
+    if(blog == null){
+      res.status(401).json({ MESSAGE: "already updated or didn't find"});
+    }
+    res.status(201).json({blog})
   }catch(err){
     res.status(500).json({ MESSAGE: err.message});
   }
 }
 
-exports.readBlogOne = async (req, res) => {
-  const { username, title } = req.body;
-  try{
-    const blog = await Blog.findOne({username, title});
-    res.status(200).json({blog, authenticated: true});
-  }catch(err){
-    res.status(500).json({ MESSAGE: err.message});
+exports.readBlog = async (req,res) => {
+  //const { postID, username, title, content, createdAt } = req.body;
+  //if query username and title is provided it can query that specific document if none is provided it will find all blogs
+  //http://localhost:3000/api/blogs/read/?username=test&title=testtitleasg2
+  const user = req.query.username;
+  const title = req.query.title;
+  if(user != null && title != null){
+    const { username, title } = req.body;
+    try{
+      const blog = await Blog.findOne({username, title});
+      res.status(200).json({blog, authenticated: true});
+    }catch(err){
+      res.status(500).json({ MESSAGE: err.message});
+    }
+  }else{
+    try{
+      const blog = await Blog.find();
+      res.status(200).json({blog, authenticated: true});
+    }catch(err){
+      res.status(500).json({ MESSAGE: err.message});
+    }
   }
 }
 
