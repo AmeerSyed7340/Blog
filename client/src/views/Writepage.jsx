@@ -1,12 +1,19 @@
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import CreateBlogDialog from '../components/CreateBlogDialog';
+import { useNavigate } from 'react-router-dom';
 
 export default function WritePage() {
     const { username } = useAuth();
     const [dialogOpen, setDialogOpen] = useState(true);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+
+    const navigate = useNavigate();
+
+    const goToHomePage = () =>{
+        navigate('/');
+    }
 
     const handleClickOpen = () => {
         setDialogOpen(true);
@@ -34,6 +41,7 @@ export default function WritePage() {
             if (response.status == 200 || response.status == 201) {
                 console.log(response, data);
                 handleClose();
+                goToHomePage();
             } else {
                 console.log('Server responded with status:', response.status);
             }
