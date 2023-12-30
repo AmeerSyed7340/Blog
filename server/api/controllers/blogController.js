@@ -7,7 +7,7 @@ exports.createBlog = async (req, res) => {
           username,
           title,
           content,
-          createdAt
+
         });
         await blog.save();
         res.status(201).json({ authenticated: true, message: "created blog"});
@@ -17,6 +17,7 @@ exports.createBlog = async (req, res) => {
 }
 
 exports.updateBlog = async (req, res) => {
+
 
 }
 
@@ -30,6 +31,22 @@ exports.readBlog = async (req,res) => {
   }
 }
 
-exports.deleteBlog = async (req, res) => {
+exports.readBlogOne = async (req, res) => {
+  const { username, title } = req.body;
+  try{
+    const blog = await Blog.findOne({username, title});
+    res.status(200).json({blog, authenticated: true});
+  }catch(err){
+    res.status(500).json({ MESSAGE: err.message});
+  }
+}
 
+exports.deleteBlog = async (req, res) => {
+  const { username, title } = req.body;
+  try{
+    const blog = await Blog.deleteOne({username, title})
+    res.status(201).json(blog)
+  }catch(err){
+    res.status(500).json({ MESSAGE: err.message});
+  }
 }
