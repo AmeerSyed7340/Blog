@@ -2,11 +2,13 @@ import { useEffect, useState } from "react"
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     //useeffect to mount right at the beginning.
     useEffect(() => {
@@ -40,10 +42,13 @@ export default function HomePage() {
         return <div>Error: {error}</div>;
     }
 
+    function handleClick(_id){
+        navigate(`/blog/${_id}`);
+    }
     return (
         <div>
             {blogs.map(blog => (
-                <Card key={blog._id} sx={{ marginBottom: 2 }}>
+                <Card key={blog._id} sx={{ marginBottom: 2 }} onClick={()=>handleClick(blog._id)}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             {blog.title}
