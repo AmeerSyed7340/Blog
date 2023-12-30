@@ -8,10 +8,12 @@ import { useState } from 'react';
 import CreateDialog from './CreateDialog';
 import CreateBlog from './CreateBlog';
 import RetrieveUserBlog from './RetrieveUserBlogs';
+import { useNavigate } from 'react-router-dom';
 
 export default function NavBar({ authorize_flag, setAuthorize_flag }) {
   const [open, setOpen] = useState(false);
   const [signupOpen, setsignupOpen] = useState(false);
+  const navigate = useNavigate();
 
   function handleLogin() {
     setOpen(true);
@@ -26,12 +28,15 @@ export default function NavBar({ authorize_flag, setAuthorize_flag }) {
     setsignupOpen(true);
   }
 
+  function handleBlogBtn(){
+    navigate('/');
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Title
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor:'pointer'}} onClick={handleBlogBtn}>
+            Blogs
           </Typography>
           {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Login</Button>}
           {!authorize_flag && <Button color="inherit" onClick={handleSignup}>Sign Up</Button>}
