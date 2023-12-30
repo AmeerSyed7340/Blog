@@ -42,7 +42,7 @@ export default function HomePage() {
 
     return (
         <div>
-            {blogs.map(blog => {
+            {blogs.map(blog => (
                 <Card key={blog._id} sx={{ marginBottom: 2 }}>
                     <CardContent>
                         <Typography variant="h5" component="div">
@@ -53,7 +53,7 @@ export default function HomePage() {
                         </Typography>
                     </CardContent>
                 </Card>
-            })}
+            ))}
         </div>
     )
 }
