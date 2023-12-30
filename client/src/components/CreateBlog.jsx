@@ -2,13 +2,19 @@ import Button from '@mui/material/Button';
 import { useAuth } from '../contexts/AuthContext';
 import { useState } from 'react';
 import CreateBlogDialog from './CreateBlogDialog';
+import { useNavigate } from 'react-router-dom';
 
-export default function CreateBlog() {
+export default function CreateBlog({}) {
     const { username } = useAuth();
     const [dialogOpen, setDialogOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
+    const navigate = useNavigate(); // Use the hook directly
+
+    const goToWritePage = () => {
+        navigate('/write');
+    }
     const handleClickOpen = () => {
         setDialogOpen(true);
     };
@@ -50,16 +56,8 @@ export default function CreateBlog() {
     }
     return (
         <>
-            <Button color='inherit' onClick={handleClickOpen}>Create Blog</Button>
-            <CreateBlogDialog
-                open={dialogOpen}
-                handleClose={handleClose}
-                setContent={setContent}
-                setTitle={setTitle}
-                title={title}
-                content={content}
-                endpoint_call={endpoint_call}
-            />
+            <Button color='inherit' onClick={goToWritePage}>Create Blog</Button>
+            
         </>
     );
 }
