@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateBlogDialog({ open, handleClose, endpoint_call, setTitle, setContent, title, content}) {
-  
+  const navigate = useNavigate();
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -12,7 +13,9 @@ export default function CreateBlogDialog({ open, handleClose, endpoint_call, set
     setContent(event.target.value);
   };
 
-
+  const goToHomePage = () =>{
+    navigate('/');
+}
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Create Blog</DialogTitle>
@@ -42,7 +45,10 @@ export default function CreateBlogDialog({ open, handleClose, endpoint_call, set
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={() => {
+          handleClose();
+          goToHomePage();
+        }}>Cancel</Button>
         <Button onClick={endpoint_call}>Submit</Button>
       </DialogActions>
     </Dialog>
