@@ -38,6 +38,7 @@ export default function NavBar({ authorize_flag, setAuthorize_flag }) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor:'pointer'}} onClick={handleBlogBtn}>
             Blogs
           </Typography>
+          {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Guest Login</Button>}
           {!authorize_flag && <Button color="inherit" onClick={handleLogin}>Login</Button>}
           {!authorize_flag && <Button color="inherit" onClick={handleSignup}>Sign Up</Button>}
           {authorize_flag && <CreateBlog />}
