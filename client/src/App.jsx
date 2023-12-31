@@ -27,7 +27,7 @@ function App() {
           />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/blog/:id" element={<ReadPage />} />
+            <Route path="/blog/:id/:username/:title" element={<ReadPage />} />
             <Route path="/write" element={
               authorize_flag ? <WritePage /> : <Navigate to="/" />
             } />

@@ -42,13 +42,13 @@ export default function HomePage() {
         return <div>Error: {error}</div>;
     }
 
-    function handleClick(_id){
-        navigate(`/blog/${_id}`);
+    function handleClick(_id, username, title){
+        navigate(`/blog/${_id}/${username}/${title}`);
     }
     return (
         <div>
             {blogs.map(blog => (
-                <Card key={blog._id} sx={{ marginBottom: 2, cursor:'pointer' }} onClick={()=>handleClick(blog._id)}>
+                <Card key={blog._id} sx={{ marginBottom: 2, cursor:'pointer' }} onClick={()=>handleClick(blog._id, blog.username, blog.title)}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             {blog.title}
