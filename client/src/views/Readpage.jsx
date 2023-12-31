@@ -15,15 +15,43 @@ export default function ReadPage() {
     const [title, setTitle] = useState(fourthSegment.toString());
     const [username, setUsername] = useState(thirdSegment.toString());
     const [content, setContent] = useState('Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum');
-    const[date, setDate] = useState(new Date());
-    
+    const [date, setDate] = useState(new Date());
+
     console.log(secondSegment);
     console.log(thirdSegment);
     console.log(fourthSegment);
-    
-    useEffect(()=>{
-        
-    });
+
+    useEffect(() => {
+        async function endpoint_call() {
+            //console.log(Username, Password)
+            try {
+                const response = await fetch("http://127.0.0.1:3000/api/blogs/read", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        _id: `${secondSegment}`,
+                        username: `${thirdSegment}`,
+                        title: `${fourthSegment}`
+
+                    })
+                });
+                const data = await response.json();
+                if (response.status == 200) {
+                    console.log(response, data);
+
+                } else {
+                    console.log('didnt work');
+                }
+
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        endpoint_call();
+    }, []);
 
     return (
         <Grid container style={{ minHeight: '100vh' }} justifyContent="center" margin={7}>

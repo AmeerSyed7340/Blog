@@ -34,10 +34,12 @@ exports.readBlog = async (req,res) => {
   //http://localhost:3000/api/blogs/read/?username=test&title=testtitleasg2
   const user = req.query.username;
   const title = req.query.title;
-  if(user != null && title != null){
-    const { username, title } = req.body;
+  //Ameer's addition of id below
+  const _id = req.query._id;
+  if(user != null && title != null && _id != null){
+    const { username, title, _id } = req.body;
     try{
-      const blog = await Blog.findOne({username, title});
+      const blog = await Blog.findOne({username, title, _id});
       res.status(200).json({blog, authenticated: true});
     }catch(err){
       res.status(500).json({ MESSAGE: err.message});
