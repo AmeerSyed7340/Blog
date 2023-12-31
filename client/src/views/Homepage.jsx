@@ -48,7 +48,7 @@ export default function HomePage() {
     return (
         <div>
             {blogs.map(blog => (
-                <Card key={blog._id} sx={{ marginBottom: 2, cursor:'pointer' }} onClick={()=>handleClick(blog._id, blog.username, blog.title)}>
+                <Card key={blog._id} sx={{ marginBottom: 2, cursor:'pointer', maxHeight: 92 }} onClick={()=>handleClick(blog._id, blog.username, blog.title)}>
                     <CardContent>
                         <Typography variant="h5" component="div">
                             {blog.title}
