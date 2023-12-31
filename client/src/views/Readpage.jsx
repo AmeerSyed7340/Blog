@@ -12,46 +12,45 @@ export default function ReadPage() {
     const thirdSegment = decodeURIComponent(urlThirdSegment);
     const fourthSegment = decodeURIComponent(urlFourthSegment);
 
-    const [title, setTitle] = useState(fourthSegment.toString());
-    const [username, setUsername] = useState(thirdSegment.toString());
-    const [content, setContent] = useState('Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum');
-    const [date, setDate] = useState(new Date());
-
-    console.log(secondSegment);
-    console.log(thirdSegment);
-    console.log(fourthSegment);
+    const [title, setTitle] = useState('');
+    const [username, setUsername] = useState('');
+    const [content, setContent] = useState('');
+    const [date, setDate] = useState('');
 
     useEffect(() => {
         async function endpoint_call() {
-            //console.log(Username, Password)
             try {
-                const response = await fetch("http://127.0.0.1:3000/api/blogs/read", {
-                    method: "POST",
+                const queryParams = new URLSearchParams({
+                    _id: secondSegment,
+                    username: thirdSegment,
+                    title: fourthSegment
+                }).toString();
+    
+                const response = await fetch(`http://127.0.0.1:3000/api/blogs/read?${queryParams}`, {
+                    method: "GET",
                     headers: {
                         "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        _id: `${secondSegment}`,
-                        username: `${thirdSegment}`,
-                        title: `${fourthSegment}`
-
-                    })
+                    }
                 });
                 const data = await response.json();
-                if (response.status == 200) {
-                    console.log(response, data);
-
+                if (response.status === 200) {                                        
+                    // Update state with fetched data
+                    setTitle(data.blog.title);
+                    setUsername(data.blog.username);
+                    setContent(data.blog.content);
+                    setDate(data.blog.createdAt);
                 } else {
-                    console.log('didnt work');
+                    console.log('Server responded with status:', response.status);
                 }
-
+    
             } catch (e) {
                 console.error(e);
             }
         }
-
+    
         endpoint_call();
-    }, []);
+    }, [secondSegment, thirdSegment, fourthSegment]); // Dependencies for useEffect
+    
 
     return (
         <Grid container style={{ minHeight: '100vh' }} justifyContent="center" margin={7}>

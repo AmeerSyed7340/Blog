@@ -36,21 +36,42 @@ exports.readBlog = async (req,res) => {
   const title = req.query.title;
   //Ameer's addition of id below
   const _id = req.query._id;
-  if(user != null && title != null && _id != null){
-    const { username, title, _id } = req.body;
-    try{
-      const blog = await Blog.findOne({username, title, _id});
-      res.status(200).json({blog, authenticated: true});
-    }catch(err){
-      res.status(500).json({ MESSAGE: err.message});
+
+  // if(user != null && title != null && _id != null){
+  //   const { username, title, _id } = req.body;
+  //   try{
+  //     const blog = await Blog.findOne({username, title, _id});
+  //     res.status(200).json({blog, authenticated: true});
+  //   }catch(err){
+  //     res.status(500).json({ MESSAGE: err.message});
+  //   }
+  // }else{
+  //   try{
+  //     const blog = await Blog.find();
+  //     res.status(200).json({blog, authenticated: true});
+  //   }catch(err){
+  //     res.status(500).json({ MESSAGE: err.message});
+  //   }
+  // }
+
+  //chatgpt attempt
+  try {
+    let blog;
+    if (user && title && _id) {
+      // If username, title, and _id are provided, find the specific blog
+      blog = await Blog.findOne({ username: user, title: title, _id: _id });
+    } else {
+      // If not all are provided, find all blogs
+      blog = await Blog.find();
     }
-  }else{
-    try{
-      const blog = await Blog.find();
-      res.status(200).json({blog, authenticated: true});
-    }catch(err){
-      res.status(500).json({ MESSAGE: err.message});
+
+    if (blog) {
+      res.status(200).json({ blog, authenticated: true });
+    } else {
+      res.status(404).json({ MESSAGE: "Blog not found" });
     }
+  } catch (err) {
+    res.status(500).json({ MESSAGE: err.message });
   }
 }
 
