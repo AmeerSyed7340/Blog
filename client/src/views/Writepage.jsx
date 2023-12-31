@@ -11,10 +11,6 @@ export default function WritePage() {
 
     const navigate = useNavigate();
 
-    const goToHomePage = () =>{
-        navigate('/');
-    }
-
     const handleClickOpen = () => {
         setDialogOpen(true);
     };
@@ -41,7 +37,7 @@ export default function WritePage() {
             if (response.status == 200 || response.status == 201) {
                 console.log(response, data);
                 handleClose();
-                goToHomePage();
+                navigate('/');
             } else {
                 console.log('Server responded with status:', response.status);
             }

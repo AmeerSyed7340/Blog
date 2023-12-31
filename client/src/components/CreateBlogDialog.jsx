@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export default function CreateBlogDialog({ open, handleClose, endpoint_call, setTitle, setContent, title, content}) {
+export default function CreateBlogDialog({ open, handleClose, endpoint_call, setTitle, setContent, title, content }) {
   const navigate = useNavigate();
 
   const handleTitleChange = (event) => {
@@ -13,11 +13,22 @@ export default function CreateBlogDialog({ open, handleClose, endpoint_call, set
     setContent(event.target.value);
   };
 
-  const goToHomePage = () =>{
+  const goToHomePage = () => {
     navigate('/');
-}
+  }
+
+  // Custom onClose handler that ignores outside clicks
+  const handleOnClose = (event, reason) => {
+    if (reason !== 'backdropClick') {
+      handleClose();
+    }
+  };
+
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={open}
+      onClose={handleOnClose}
+      disableEscapeKeyDown      
+    >
       <DialogTitle>Create Blog</DialogTitle>
       <DialogContent>
         <TextField
