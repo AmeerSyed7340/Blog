@@ -75,8 +75,8 @@ const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={endpoint_call}>Login</Button>
+        <Button onClick={()=>{onClose(); setLogin(false)}}>Cancel</Button>
+        <Button onClick={()=>{endpoint_call(); }}>Login</Button>
       </DialogActions>
     </Dialog>
   );
