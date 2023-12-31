@@ -17,6 +17,22 @@ export default function ReadPage() {
     const [content, setContent] = useState('');
     const [date, setDate] = useState('');
 
+    function formatDate(isoString) {
+        const date = new Date(isoString);
+    
+        // Example format: "December 30, 2023, 13:21"
+        // You can adjust the format as per your requirement
+        return date.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZoneName: 'short'
+        });
+    }
+
     useEffect(() => {
         async function endpoint_call() {
             try {
@@ -38,7 +54,7 @@ export default function ReadPage() {
                     setTitle(data.blog.title);
                     setUsername(data.blog.username);
                     setContent(data.blog.content);
-                    setDate(data.blog.createdAt);
+                    setDate(formatDate(data.blog.createdAt));
                 } else {
                     console.log('Server responded with status:', response.status);
                 }
