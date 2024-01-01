@@ -4,6 +4,8 @@ import HomePage from "./views/Homepage";
 import ReadPage from "./views/Readpage";
 import WritePage from "./views/Writepage";
 import NavBar from './components/Navbar';
+import MyBlogspage from "./views/MyBlogspage";
+
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
             <Route path="/write" element={
               authorize_flag ? <WritePage /> : <Navigate to="/" />
             } />
+            <Route path="/myblogs" element={<MyBlogspage />} />
           </Routes>
         </Router>
       </>
