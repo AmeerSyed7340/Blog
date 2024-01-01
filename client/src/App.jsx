@@ -11,7 +11,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 function App() {
   const [authorize_flag, setAuthorize_flag] = useState(false);
   const [displayName, setDisplayName] = useState("");
-  
+
 
   function displayHandler(value) {
     setDisplayName(value);
@@ -33,7 +33,8 @@ function App() {
             <Route path="/write" element={
               authorize_flag ? <WritePage /> : <Navigate to="/" />
             } />
-            <Route path="/myblogs" element={<MyBlogspage />} />
+            <Route path="/myblogs" element={authorize_flag ? <MyBlogspage /> : <Navigate to="/" />
+            } />
           </Routes>
         </Router>
       </>
