@@ -19,7 +19,6 @@ export default function HomePage() {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data.blog);
                 setBlogs(data.blog);
             }
             catch (e) {
