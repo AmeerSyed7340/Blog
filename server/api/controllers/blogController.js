@@ -60,7 +60,11 @@ exports.readBlog = async (req,res) => {
     if (user && title && _id) {
       // If username, title, and _id are provided, find the specific blog
       blog = await Blog.findOne({ username: user, title: title, _id: _id });
-    } else {
+    } 
+    else if(user){
+      blog = await Blog.find({username: user});
+    }
+    else {
       // If not all are provided, find all blogs
       blog = await Blog.find();
     }
