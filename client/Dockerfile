@@ -1,6 +1,12 @@
 # Build stage
 FROM node:14 AS build
 
+# Accept build-time arguments
+ARG VITE_API_BASE_URL
+
+# Set the environment variable so that Vite can access it during build
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./

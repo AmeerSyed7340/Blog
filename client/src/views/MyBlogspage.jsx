@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 // Use DeleteOutline for an alternative style
 
@@ -21,7 +22,7 @@ export default function MyBlogspage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/api/blogs/read?username=${encodeURIComponent(username)}`, {
+                const response = await fetch(`${apiBaseUrl}/api/blogs/read?username=${encodeURIComponent(username)}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -68,7 +69,7 @@ export default function MyBlogspage() {
 
         const deleteData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/api/blogs/delete`, {
+                const response = await fetch(`${apiBaseUrl}/api/blogs/delete`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

@@ -7,6 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useAuth } from '../contexts/AuthContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
   const [Username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const LoginDialog = ({ open, onClose, onFormSubmit, setAuthorize_flag }) => {
   async function endpoint_call() {
     //console.log(Username, Password)
     try {
-      const response = await fetch("http://127.0.0.1:3000/api/users/login", {
+      const response = await fetch(`${apiBaseUrl}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { Typography, Card, CardContent, Grid } from '@mui/material';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function ReadPage() {
     const location = useLocation();
@@ -42,7 +43,7 @@ export default function ReadPage() {
                     title: fourthSegment
                 }).toString();
     
-                const response = await fetch(`http://127.0.0.1:3000/api/blogs/read?${queryParams}`, {
+                const response = await fetch(`${apiBaseUrl}/api/blogs/read?${queryParams}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

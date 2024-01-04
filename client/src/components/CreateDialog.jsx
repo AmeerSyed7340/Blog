@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 // eslint-disable-next-line react/prop-types
 const CreateDialog = ({ open, onClose }) => {
@@ -17,7 +18,7 @@ const CreateDialog = ({ open, onClose }) => {
 
   async function endpoint_call () {
     try{
-      const response = await fetch("http://127.0.0.1:3000/api/users", {
+      const response = await fetch(`${apiBaseUrl}/api/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,6 +10,7 @@ import CreateBlog from './CreateBlog';
 import RetrieveUserBlog from './RetrieveUserBlogs';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export default function NavBar({ authorize_flag, setAuthorize_flag }) {
    //create setUser using context to pass to createBlog
@@ -21,7 +22,7 @@ export default function NavBar({ authorize_flag, setAuthorize_flag }) {
   async function endpoint_call() {
     //console.log(Username, Password)
     try {
-      const response = await fetch("http://127.0.0.1:3000/api/users/login", {
+      const response = await fetch(`${apiBaseUrl}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
